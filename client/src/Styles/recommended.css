@@ -1,0 +1,99 @@
+.recommended-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.recommended-container h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.recommended-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.recommended-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.recommended-card::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  top: 0;
+  left: 0;
+}
+
+.recommended-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.recommended-card a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: #007bff;
+  display: block;
+  margin-top: 15px;
+  transition: color 0.3s ease-in-out;
+}
+
+.recommended-card a:hover {
+  color: #0056b3;
+}
+
+.recommended-card p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Optional: Adding icons */
+.recommended-card i {
+  font-size: 40px;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .recommended-cards {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+.recommended-card {
+  background: #ffffff;
+  color: #222; /* Darker text for better readability */
+  border: 2px solid #007bff;
+  padding: 1rem;
+}
+
+.recommended-card:focus {
+  outline: 3px solid #ffcc00; /* High-contrast focus indicator */
+  background: rgb(245, 231, 176);
+  color: #fff;
+}
+

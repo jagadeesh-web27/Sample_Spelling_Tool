@@ -1,0 +1,118 @@
+/* Container Styling */
+.total-score-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #f9f9f9, #e3eaf4);
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Heading Styling */
+.total-score-container h1 {
+  color: #222;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Score Card Grid */
+.score-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Individual Score Card */
+.score-card {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.score-card::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  top: 0;
+  left: 0;
+}
+
+.score-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* Score Category */
+.score-card h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Performance Label */
+.performance-label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Progress Bar */
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  transition: width 0.6s ease-in-out;
+}
+
+/* Color Coding for Performance */
+.good { background: #28a745; }
+.average { background: #ffa500; }
+.bad { background: #dc3545; }
+
+/* Back Button */
+.back-button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.back-button:hover {
+  background: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .score-cards {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}

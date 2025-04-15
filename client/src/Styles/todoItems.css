@@ -1,0 +1,13 @@
+.todo-list-container {
+    width: 100%; /* Ensures it takes full width of its parent */
+    max-width: 1000px; /* Optional: Limit the maximum width if needed */
+    margin: 0 auto; /* Center it if it's inside a larger container */
+  }
+  
+  .todo-list-container iframe {
+    width: 98%;
+    height: 700px;
+    border: none;
+    display: block;
+  }
+  

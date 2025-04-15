@@ -1,0 +1,105 @@
+/* Basic reset for margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fc;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Main container */
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Heading styles */
+h1, h2 {
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Button for levels */
+button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+button:disabled {
+  background-color: #95a5a6 !important;
+  cursor: not-allowed !important;
+  color: #666 !important; /* Optional: Change text color for disabled buttons */
+}
+
+button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+/* Styling for input fields */
+input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+input[type="text"]:focus {
+  border-color: #3498db;
+}
+
+/* List items */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 20px;
+}
+
+li p {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Result section */
+h3 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.results {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #27ae60;
+}
+
+.results p {
+  font-weight: bold;
+}
+
+.results .wrong {
+  color: #e74c3c;
+}
