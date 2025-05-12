@@ -16,7 +16,7 @@ const Home: React.FC = () => {
             <h3>Words</h3>
             <p>Learn Spelling</p>
             <Link to="/words" className="enroll-link">
-              <button 
+              <button
                 className={location.pathname === "/words" ? "active" : ""} 
                 aria-pressed={location.pathname === "/words"} 
                 tabIndex={-1}

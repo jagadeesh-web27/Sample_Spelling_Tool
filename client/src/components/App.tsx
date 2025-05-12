@@ -71,5 +71,4 @@ const App: React.FC = () => {
     </FontSizeProvider>
   );
 };
-
 export default App;
