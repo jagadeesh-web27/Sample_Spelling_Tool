@@ -278,15 +278,16 @@ const Level: React.FC = () => {
                   <p>
                     {item.hint}
                     {/* Spell Out Letter by Letter */}
-                    <span
-                      onClick={() => handleReadOut(index, item.sentence || item.word || item.content, "spell")}
-                      className="speaker-icon"
-                      tabIndex={0}
-                      role="button"
-                      aria-label={`Spell out ${item.sentence || item.word || item.content} letter by letter`}
-                    >
-                      🔡
-                    </span>
+                    <span>
+                    <button
+  onClick={() => handleReadOut(index, item.sentence || item.word || item.content, "spell")}
+  className="speaker-icon" // Keep your existing styles
+  aria-label={`Spell out ${item.sentence || item.word || item.content} letter by letter`}
+  // No need for role="button" or tabIndex={0} - button handles it natively
+>
+  🔡
+</button>
+</span>
                   </p>
                   
                   <div className="input-container">

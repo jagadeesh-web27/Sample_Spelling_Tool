@@ -24,17 +24,30 @@ const Chatbot: React.FC = () => {
       const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
       recognition.lang = "en-US";
       recognition.interimResults = false;
-      recognition.continuous = false;
+      // Set to true if you want continuous listening until explicitly stopped
+      // recognition.continuous = true;
+      recognition.continuous = false; // Based on your current code
+
       recognitionRef.current = recognition;
 
       recognition.onresult = (event: SpeechRecognitionEvent) => {
         const spokenText = event.results[0][0].transcript;
         setInput(spokenText);
+        // Optionally send message immediately after speech recognition completes
+        // sendMessage(spokenText);
       };
 
       recognition.onend = () => {
+        console.log("Speech recognition ended.");
         setIsListening(false);
       };
+
+      recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+          console.error("Speech recognition error:", event.error);
+          setIsListening(false); // Ensure listening state is reset on error
+          // Provide user feedback if necessary (e.g., "Microphone error, please try again.")
+      };
+
     } else {
       console.warn("Speech recognition is not supported in this browser.");
     }
@@ -46,9 +59,13 @@ const Chatbot: React.FC = () => {
     // Listen for bot messages
     client.on('message', (payload: any) => {
       console.log("Received message from Botpress:", payload);
+      // Ensure the payload structure matches your Botpress version
       if (payload?.type === 'bubble' && payload?.payload?.block?.type === 'text' && payload?.payload?.block?.text) {
         const botMessage: Message = { text: payload.payload.block.text, sender: "bot" };
         setMessages((prevMessages) => [...prevMessages, botMessage]);
+      } else if (payload?.type === 'text' && payload?.text) { // Fallback for direct text payloads
+          const botMessage: Message = { text: payload.text, sender: "bot" };
+          setMessages((prevMessages) => [...prevMessages, botMessage]);
       }
     });
 
@@ -80,7 +97,8 @@ const Chatbot: React.FC = () => {
     setInput("");
 
     try {
-      await botpressClientRef.current.sendMessage({ type: 'text', text: message, userId: 'user', channel: 'web' });
+      // Ensure the message format matches Botpress client's expected payload
+      await botpressClientRef.current.sendMessage({ type: 'text', text: message });
       console.log("Message sent to Botpress:", message);
     } catch (error) {
       console.error("Error sending message to Botpress:", error);
@@ -88,7 +106,8 @@ const Chatbot: React.FC = () => {
     }
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {    if (e.key === "Enter") {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
       sendMessage(input);
     }
   };
@@ -97,18 +116,26 @@ const Chatbot: React.FC = () => {
     setInput(e.target.value);
   };
 
-  const handleMicPress = () => {
-    if (!isListening && recognitionRef.current) {
-      setIsListening(true);
-      setInput("");
-      recognitionRef.current.start();
-    }
-  };
-
-  const handleMicRelease = () => {
-    if (isListening && recognitionRef.current) {
-      setIsListening(false);
-      recognitionRef.current.stop();
+  // Modified function to handle the microphone toggle
+  const toggleMicListening = () => {
+    if (recognitionRef.current) {
+      if (isListening) {
+        console.log("Stopping speech recognition.");
+        recognitionRef.current.stop();
+      } else {
+        console.log("Starting speech recognition.");
+        setInput(""); // Clear input when starting new recognition
+        setIsListening(true);
+        try {
+          recognitionRef.current.start();
+        } catch (error) {
+          // Catch errors if recognition is already in progress or not supported
+          console.error("Error starting speech recognition:", error);
+          setIsListening(false);
+        }
+      }
+    } else {
+      console.warn("Speech recognition API not available or not initialized.");
     }
   };
 
@@ -137,14 +164,13 @@ const Chatbot: React.FC = () => {
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
               placeholder="Type a message or use the mic..."
+              aria-label="Type your message" // Good for accessibility
             />
-            <button onClick={() => sendMessage(input)}>Send</button>
+            <button onClick={() => sendMessage(input)} aria-label="Send message">Send</button>
             <button
-              onMouseDown={handleMicPress}
-              onMouseUp={handleMicRelease}
-              onTouchStart={handleMicPress}
-              onTouchEnd={handleMicRelease}
+              onClick={toggleMicListening} // Use onClick for keyboard/mouse click
               style={{ backgroundColor: isListening ? "red" : "white" }}
+              aria-label={isListening ? "Stop listening" : "Start listening"} // Good for accessibility
             >
               🎤
             </button>

@@ -205,4 +205,52 @@ body {
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     z-index: 999; /* Just below the popup */
   }
+  /* Add these rules to the VERY BOTTOM of your levels.css file */
+
+/* Target the speaker icon button specifically */
+button.speaker-icon {
+    /* === CRITICAL RESETS TO MAKE IT LOOK LIKE AN EMOJI/TEXT === */
+    background: transparent !important; /* Make background completely transparent */
+    border: none !important;           /* Remove any borders */
+    padding: 0 !important;             /* Remove all internal padding */
+    margin: 0 5px !important;          /* Remove default margins, add a small right margin for spacing */
+    
+    /* Inherit font and color from its parent (so the emoji scales with text) */
+    font: inherit !important;          /* Inherit font family, size, weight */
+    color: inherit !important;         /* Inherit text color */
+    
+    /* Remove browser-specific default button appearance */
+    -webkit-appearance: none !important; /* For Chrome, Safari */
+    -moz-appearance: none !important;    /* For Firefox */
+    appearance: none !important;         /* Standard property */
+
+    /* Ensure it remains inline and aligns vertically */
+    display: inline-block !important; /* Keep it inline with text */
+    vertical-align: middle !important; /* Align it properly with the text baseline */
+    cursor: pointer !important;        /* Keep the pointer cursor */
+    line-height: normal !important;    /* Prevents extra height from default button line-height */
+
+    /* Optional: Set emoji size explicitly if 'inherit' isn't large enough */
+    /* font-size: 1.5em !important; */ /* Adjust as needed */
+
+    /* --- FOR DEBUGGING ONLY: Add a temporary border to see its exact box --- */
+    /* border: 1px solid red !important; */
+}
+
+/* Ensure the parent <p> is a flex container for side-by-side alignment */
+/* This is essential for the hint text and button to stay together */
+.level-item p {
+    display: flex !important;     /* Force flex container */
+    align-items: center !important; /* Force vertical centering */
+    gap: 5px !important;         /* Space between hint and button */
+    margin: 0 !important;         /* Remove default <p> margins */
+    flex-wrap: wrap !important;   /* Allow text to wrap if hint is very long */
+}
+
+/* Accessibility: Focus styles (crucial if you removed default outline) */
+button.speaker-icon:focus-visible {
+    outline: 2px solid #007bff !important;
+    outline-offset: 2px !important;
+    border-radius: 3px !important;
+}
   
